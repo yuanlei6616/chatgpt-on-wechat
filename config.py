@@ -70,6 +70,8 @@ available_setting = {
 
     # chatgpt指令自定义触发词
     "clear_memory_commands": ['#清除记忆'],  # 重置会话指令
+
+    # channel配置
     "channel_type": "wx", # 通道类型，支持wx,wxy和terminal
 
 
@@ -122,7 +124,12 @@ def load_config():
             try:
                 config[name] = eval(value)
             except:
-                config[name] = value
+                if value == "false":
+                    config[name] = False
+                elif value == "true":
+                    config[name] = True
+                else:
+                    config[name] = value
 
     logger.info("[INIT] load config: {}".format(config))
 
